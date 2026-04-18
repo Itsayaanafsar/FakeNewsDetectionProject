@@ -103,3 +103,8 @@ http://127.0.0.1:8000/
 ![App UI](ui.png)
 ![App UI](ui2.png)
 
+---
+
+##⚠️ Note 
+
+vectorizer.pkl is not included due to size limits. Run train_model.py to generate it before running the project.
