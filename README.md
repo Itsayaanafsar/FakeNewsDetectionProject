@@ -105,6 +105,6 @@ http://127.0.0.1:8000/
 
 ---
 
-##⚠️ Note 
+## ⚠️ Note 
 
 vectorizer.pkl is not included due to size limits. Run train_model.py to generate it before running the project.
