@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truthify - Fake News Detection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: rgba(0,0,0,0.6);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 140px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: #00c6ff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: black;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00a2cc;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .real {
+            color: #00ff9c;
+        }
+
+        .fake {
+            color: #ff4d4d;
+        }
+
+        /* NEW STYLES */
+        .samples {
+            margin-top: 25px;
+        }
+
+        .samples h3 {
+            margin-bottom: 10px;
+        }
+
+        .sample-item {
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .sample-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .real-sample {
+            border-left: 4px solid #00ff9c;
+        }
+
+        .fake-sample {
+            border-left: 4px solid #ff4d4d;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📰 Fake News Detection</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <textarea id="newsInput" name="news" placeholder="Paste news article or headline here..." required></textarea>
+
+            <button type="submit">Check News</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                Prediction:
+                <span class="{% if result == 'Real' %}real{% else %}fake{% endif %}">
+                    {{ result }}
+                </span>
+            </div>
+        {% endif %}
+
+        <!-- 🔥 SAMPLE NEWS SECTION -->
+        <div class="samples">
+            <h3>Try Sample News (Click to use)</h3>
+
+            <p><b>🟢 Real News:</b></p>
+
+            <div class="sample-item real-sample" onclick="fillText(this)">
+                Finance Minister presents budget in parliament.
+            </div>
+
+            <div class="sample-item real-sample" onclick="fillText(this)">
+                Prime Minister addresses nation on economic reforms.
+            </div>
+
+            <p><b>🔴 Fake News:</b></p>
+
+            <div class="sample-item fake-sample" onclick="fillText(this)">
+                NASA confirms Earth will experience 15 days of complete darkness next month.
+            </div>
+
+            <div class="sample-item fake-sample" onclick="fillText(this)">
+                Drinking hot water every 15 minutes kills all viruses instantly including COVID-19.
+            </div>
+
+            <div class="sample-item fake-sample" onclick="fillText(this)">
+                Government is giving ₹5 lakh to every citizen who shares a message on WhatsApp.
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 🔥 JS for auto-fill -->
+    <script>
+        function fillText(element) {
+            document.getElementById("newsInput").value = element.innerText;
+        }
+    </script>
+
+</body>
+</html>
