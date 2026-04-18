@@ -100,6 +100,6 @@ http://127.0.0.1:8000/
 
 ## 📸 Screenshots
 
-![App UI](screenshots/ui.png)
-![App UI](screenshots/ui2.png)
+![App UI](ui.png)
+![App UI](ui2.png)
 
